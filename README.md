@@ -13,6 +13,16 @@ Dockerize Parser PUU is a project aimed at containerizing the Parser PUU algorit
 2. pdf2image python library
 3. tesseract python library
 
+## Installation
+1. Build the docker image
+```
+docker build -t parser-puu-container .
+```
+2. Run the docker image
+```
+docker run parser-puu-container
+```
+
 ## Contributing
 Contributions to Dockerize Parser PUU are welcome! If you have any suggestions, feature requests, or bug reports, please feel free to open an issue or create a pull request on the GitHub repository.
 
