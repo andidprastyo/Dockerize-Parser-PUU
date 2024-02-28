@@ -4,9 +4,9 @@ from pdf2image import convert_from_path
 import pytesseract
 
 # File paths
-PDF_FILE_PATH = './Data/91~PMK.01~2017Per.pdf'
-OUTPUT_JSON_FILE = './parsed_data.json'
-POOPLER_PATH = '/usr/bin'
+pdf_file_path = './Data/91~PMK.01~2017Per.pdf'
+output_json_file = './parsed_data.json'
+poppler_path = '/usr/bin'
 
 def extract_text_from_pdf(pdf_file_path):
     """Extract text from a PDF file using pytesseract.
@@ -17,7 +17,7 @@ def extract_text_from_pdf(pdf_file_path):
     Returns:
         str: Extracted text from the PDF.
     """
-    images = convert_from_path(pdf_file_path, poppler_path=POOPLER_PATH)
+    images = convert_from_path(pdf_file_path, poppler_path=poppler_path)
     extracted_text = ''
     for image in images:
         extracted_text += pytesseract.image_to_string(image)
@@ -123,14 +123,13 @@ def save_to_json(parsed_text, output_file):
         json.dump(parsed_text, json_file, indent=4)
 
 if __name__ == "__main__":
-    extracted_text = extract_text_from_pdf(PDF_FILE_PATH)
+    extracted_text = extract_text_from_pdf(pdf_file_path)
     cleaned_text = clean_text(extracted_text)
     parsed_content = parse_text(cleaned_text)
-    save_to_json(parsed_content, OUTPUT_JSON_FILE)
 
     try:
-        with open(OUTPUT_JSON_FILE, 'w', encoding='utf-8') as json_file:
+        with open(output_json_file, 'w+', encoding='utf-8') as json_file:
             json.dump(parsed_content, json_file, indent=4)
-        print(f"Parsed content saved to {OUTPUT_JSON_FILE}")
+        print(f"Parsed content saved to {output_json_file}")
     except Exception as e:
         print(f"Error saving parsed content to JSON file: {e}")
