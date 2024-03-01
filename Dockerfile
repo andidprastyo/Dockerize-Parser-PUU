@@ -11,6 +11,6 @@ COPY requirements.txt /Dockerize-Parser-PUU/
 
 RUN pip install -r requirements.txt
 
-COPY . /Dockerize-Parser-PUU
+COPY . .
 
 CMD ["python", "parse_ocr.py"]
